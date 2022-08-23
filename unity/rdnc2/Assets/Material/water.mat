@@ -78,7 +78,7 @@ Material:
     m_Floats:
     - Vector1_033e5c6bd8034f5698656bb7bc99452f: 0.75
     - Vector1_1f6c455dd6a44588a488c754655dd945: 2
-    - Vector1_265ac7aaa1604a36b0566915d25aac40: 1
+    - Vector1_265ac7aaa1604a36b0566915d25aac40: 2.27
     - Vector1_a418b9d687534dcfbff2007c80757212: 0.2
     - _AlphaClip: 0
     - _Blend: 0
@@ -99,6 +99,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _SampleGI: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

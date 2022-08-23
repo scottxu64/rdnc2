@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house-half
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 67435dd7c0d042d4c81263f2250adc99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67435dd7c0d042d4c81263f2250adc99, type: 3}
 --- !u!1 &267331792
@@ -5082,6 +5086,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bridge
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5f988d38c7d03d4eb9b6069d9c4b5a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5f988d38c7d03d4eb9b6069d9c4b5a4, type: 3}
 --- !u!1 &705507993
@@ -5254,8 +5262,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.0003973088, y: 0.96643794, z: -0.2568961, w: 0.0014318861}
-  m_LocalPosition: {x: 117.146164, y: 54.274223, z: 49.398247}
+  m_LocalRotation: {x: 0.2742331, y: 0.21151313, z: -0.06201529, w: 0.9360623}
+  m_LocalPosition: {x: 134.81566, y: 19.33906, z: -11.820772}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2052770577}
@@ -5349,6 +5357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house-full
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6dbc25b6ae7b5824fb26afbced28dc1e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dbc25b6ae7b5824fb26afbced28dc1e, type: 3}
 --- !u!1001 &1358780772
@@ -5409,6 +5421,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 543df1e9bfbd1b74191e48107534d69b, type: 3}
       propertyPath: m_Name
       value: land
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 543df1e9bfbd1b74191e48107534d69b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 543df1e9bfbd1b74191e48107534d69b, type: 3}
@@ -5472,6 +5488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: house-flat
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e03e7014bf7414a488404535250fb170, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e03e7014bf7414a488404535250fb170, type: 3}
 --- !u!1001 &1617198370
@@ -5533,6 +5553,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: water
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8a21aebc766dbc6439563db25b900262, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a21aebc766dbc6439563db25b900262, type: 3}
 --- !u!1001 &1692771998
@@ -5586,6 +5610,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1461304994638716399, guid: 18e173ffdb6f6fb459fb9ddf5a836993, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ad11d96fb86768348b402ad2f0d996d6, type: 2}
+    - target: {fileID: -804731622281664130, guid: 18e173ffdb6f6fb459fb9ddf5a836993, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ad11d96fb86768348b402ad2f0d996d6, type: 2}
+    - target: {fileID: -678588488315902003, guid: 18e173ffdb6f6fb459fb9ddf5a836993, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ad11d96fb86768348b402ad2f0d996d6, type: 2}
     - target: {fileID: 919132149155446097, guid: 18e173ffdb6f6fb459fb9ddf5a836993, type: 3}
       propertyPath: m_Name
       value: model
