@@ -1,0 +1,2 @@
+7:35
+after paste flipped, need manual fix of bone rotation
