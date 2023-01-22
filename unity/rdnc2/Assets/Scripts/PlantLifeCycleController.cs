@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class LifeCycleController : MonoBehaviour
+public class PlantLifeCycleController : MonoBehaviour
 {
     public List<GameObject> prefabs;
     public float minLifeLengthInSeconds = 3;
     public float maxLifeLengthInSeconds = 5;
-    public bool randomizeNextObjectPosition = false;
-    public bool destroyLastObject = false;
 
     private int currentIndex;
     private GameObject instance;
@@ -26,17 +24,16 @@ public class LifeCycleController : MonoBehaviour
         }
         else if (DateTime.Now > nextInstanceStartTime)
         {
-            if (currentIndex+1 < prefabs.Count)           // middle ones
+            if (currentIndex + 1 < prefabs.Count)           // middle ones
             {
                 Destroy(instance);
 
                 currentIndex++;
-                instance = Instantiate(prefabs[currentIndex], transform.position, transform.rotation); // TODO: new transform if for cloud
+                instance = Instantiate(prefabs[currentIndex], transform.position, transform.rotation);
                 nextInstanceStartTime = DateTime.Now.AddSeconds(Random.Range(minLifeLengthInSeconds, maxLifeLengthInSeconds));
             }
-            else if (destroyLastObject)               // last one
+            else                                            // last one
             {
-                Destroy(instance);
                 Destroy(gameObject);
             }
         }
