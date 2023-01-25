@@ -23,7 +23,7 @@ public class PlantCreateController : MonoBehaviour
 
 
 
-    private Vector3 GetGroundSpawnPosition(float range = 500f)
+    private Vector3 GetGroundSpawnPosition(float range = float.MaxValue)
     {
         var x = Random.Range(0, Screen.width);
         var y = Random.Range(0, Screen.height);
