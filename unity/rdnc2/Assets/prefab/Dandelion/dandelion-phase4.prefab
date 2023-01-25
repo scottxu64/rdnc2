@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4793023770472669789}
   - component: {fileID: 7305061729566070423}
   m_Layer: 0
-  m_Name: dandeliion-phase4
+  m_Name: dandelion-phase4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
