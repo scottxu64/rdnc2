@@ -116,8 +116,8 @@ Material:
     - Vector1_EB7F5DFB: 150
     - Vector1_F591A23A: -0.03
     - Vector1_e447c4cc8b7d4aa1bb50df149727dbaf: 1
-    - Vector1_e9c25d97b3c945c396e5f78c4ad28a04: 0.5
-    - Water_Depth: 2.6
+    - Vector1_e9c25d97b3c945c396e5f78c4ad28a04: 0.3
+    - Water_Depth: 1
     - Wave_Height: 0.3
     - Wave_Scale: 5
     - Wave_Speed: 0.4
