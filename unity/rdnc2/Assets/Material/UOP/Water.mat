@@ -83,14 +83,14 @@ Material:
     m_Ints: []
     m_Floats:
     - Foam_Amount: 0.6
-    - Foam_Cutoff: 0.33
+    - Foam_Cutoff: 0.3
     - Foam_Evolution_Speed: 0.4
     - Foam_Scale: 0.5
     - Global_Fading: 200
     - Light_Probe_Contribution: 1
-    - Refaction_Scale: 1
+    - Refaction_Scale: 2
     - Refraction_Evolution_Speed: 1
-    - Refraction_Height: 0.2
+    - Refraction_Height: 1
     - Refraction_Scale: 9.11
     - Vector1_157E1F63: 2
     - Vector1_25aa78d5cd65435697c3191e93a6343a: 0.4
