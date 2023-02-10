@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &839122673685987569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 839122673685987570}
+  - component: {fileID: 839122673685987571}
+  m_Layer: 0
+  m_Name: TreeSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &839122673685987570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839122673685987569}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40.06, y: 5, z: -55.79}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &839122673685987571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839122673685987569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8826e03881a2f444b7f88de0898ae5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 1701224484267988887, guid: 43b81fb4c817e4b4f94f1386386bae0b, type: 3}
+  - {fileID: 7762452788772934173, guid: e5b2275974e659e40b3325afd6b6bdba, type: 3}
+  - {fileID: 440950527145447032, guid: 7cff6cd9a30b19f4ca3db96926a3ed90, type: 3}
+  - {fileID: 6538455134023602006, guid: 23655109d41332643af16359c787edc1, type: 3}
+  - {fileID: 701688573369488490, guid: 3ccd32f758469394482ade4adaf431a4, type: 3}
+  - {fileID: 2271413258861333418, guid: 28dd1961692462f4a8e60e1de58073c3, type: 3}
+  minInstancesCount: 8
+  maxInstancesCount: 12
+  minDistanceBetweenInstances: 0
+  maxDistanceBetweenInstances: 8

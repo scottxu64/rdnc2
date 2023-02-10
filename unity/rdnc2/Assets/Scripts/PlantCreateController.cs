@@ -6,20 +6,17 @@ public class PlantCreateController : MonoBehaviour
 {
     public LayerMask layerMask;
 
+    public int spawnSpeed = 1;
+    public int maxInstanceCount = 100;
     public List<GameObject> prefabs;
 
 
     private void FixedUpdate()
     {
         // trigger conditions
-        // randomize gameobject
         var position = GetGroundSpawnPosition();
-        CreateInstance(prefabs[0], position);
+        CreateInstance(prefabs[Random.Range(0, prefabs.Count)], position);
     }
-
-
-
-
 
 
 
