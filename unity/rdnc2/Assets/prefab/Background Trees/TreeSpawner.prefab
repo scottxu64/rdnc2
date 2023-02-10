@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 6538455134023602006, guid: 23655109d41332643af16359c787edc1, type: 3}
   - {fileID: 701688573369488490, guid: 3ccd32f758469394482ade4adaf431a4, type: 3}
   - {fileID: 2271413258861333418, guid: 28dd1961692462f4a8e60e1de58073c3, type: 3}
-  minInstancesCount: 8
-  maxInstancesCount: 12
-  minDistanceBetweenInstances: 0
-  maxDistanceBetweenInstances: 8
+  minInstancesCount: 10
+  maxInstancesCount: 15
+  minDistanceBetweenInstances: 1
+  maxDistanceBetweenInstances: 10
