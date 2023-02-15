@@ -4497,7 +4497,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   spawnSpeed: 0.1
-  maxInstanceCount: 2000
+  maxInstanceCount: 1500
   prefabs:
   - {fileID: 6526229200018832339, guid: a84bfc6948c4054459e4415d22b32c29, type: 3}
   - {fileID: -686832971057244619, guid: a6c2b8b156b42f647a6af026cc50fef3, type: 3}

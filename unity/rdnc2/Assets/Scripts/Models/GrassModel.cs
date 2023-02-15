@@ -6,64 +6,50 @@ using Random = UnityEngine.Random;
 
 public class GrassModel : MonoBehaviour
 {
-    public int health = 10;
-    public int lifeLength = 3;  // TODO: random range
-    private float createTime;
-
+    private int health;
+    private int lifeLength;
     private Action<GrassModel> releaseFn;  // c# way of passing methods, generic type is parameter type
 
-    public void Init()
+    public void Init(Vector3 spawnPosition)
     {
-        health = 10;
-        gameObject.transform.position = GetGroundSpawnPosition();
-        createTime = Time.time;
+        health = Random.Range(10, 20);
+        lifeLength = Random.Range(60, 120); // averge lifeLength=90, with spawnSpeed=0.1, total instance=900
+        gameObject.transform.position = spawnPosition;
     }
 
-    public void Init(Action<GrassModel> r)
+    public void Init(Vector3 spawnPosition, Action<GrassModel> rfn)
     {
-        Init();
-        releaseFn = r;
+        Init(spawnPosition);
+        releaseFn = rfn;
     }
 
-    public void FixedUpdate()
+    private void Start()
     {
-        if (Time.time > createTime + lifeLength)
-        {
-            releaseFn?.Invoke(this);
-        }
+        Invoke(nameof(ReleaseGrass), lifeLength);
     }
+
+    private void ReleaseGrass()
+    {
+        releaseFn?.Invoke(this);    // TODO: there are always inital 11 instance won't have release fn passed in
+    }
+
+
 
 
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if (collision.transform.CompareTag("Building"))
     //    {
-    //        ReleaseFn(this);
+    //        releaseFn?.Invoke(this);
     //    }
     //    else if (collision.transform.CompareTag("Animal"))
     //    {
     //        health--;
     //        if (health == 0)
     //        {
-    //            ReleaseFn(this);
+    //            releaseFn?.Invoke(this);
     //        }
     //    }
     //}
 
-    private Vector3 GetGroundSpawnPosition(float range = float.MaxValue)
-    {
-        var x = Random.Range(0, Screen.width);
-        var y = Random.Range(0, Screen.height);
-        var screenPosition = new Vector3(x, y, 0);
-
-        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-
-        Physics.Raycast(ray, out RaycastHit hit, range);
-
-        return hit.point;
-
-
-
-
-    }
 }
