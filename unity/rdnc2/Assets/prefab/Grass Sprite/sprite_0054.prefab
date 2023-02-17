@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6388746783276122504}
   - component: {fileID: 6388746783276122507}
   - component: {fileID: -8741557007065486751}
+  - component: {fileID: -457929548883295032}
   m_Layer: 0
   m_Name: sprite_0054
   m_TagString: Untagged
@@ -27,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6388746783276122510}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.32, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -110,5 +111,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba342f6ea5026bb4f96c88a81758ab5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  lifeLength: 3
+  explosionPrefab: {fileID: 1220471986098533783, guid: d5af57832ff6f8d4d9c5f49c3fb5bce7, type: 3}
+--- !u!65 &-457929548883295032
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388746783276122510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.01}
+  m_Center: {x: 0, y: 0.5, z: 0}

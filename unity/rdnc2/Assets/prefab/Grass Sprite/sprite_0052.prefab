@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4881266218753634546}
   - component: {fileID: 4881266218753634557}
   - component: {fileID: 4881266218753634556}
-  - component: {fileID: 3226587390142818095}
   - component: {fileID: 484291609958694580}
   - component: {fileID: 6526229200018832339}
   m_Layer: 0
@@ -29,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4881266218753634547}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.32, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -100,22 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb4e84e865a8ac439f8e717bcf67f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &3226587390142818095
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4881266218753634547}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &484291609958694580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -124,11 +107,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4881266218753634547}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.024, y: 1.024, z: 0.01}
-  m_Center: {x: 0, y: 0.512, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.01}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &6526229200018832339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,5 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba342f6ea5026bb4f96c88a81758ab5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  lifeLength: 3
+  explosionPrefab: {fileID: 1220471986098533783, guid: d5af57832ff6f8d4d9c5f49c3fb5bce7, type: 3}
