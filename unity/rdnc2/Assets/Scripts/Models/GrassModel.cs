@@ -2,16 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
 public class GrassModel : MonoBehaviour
 {
-    public GameObject explosionPrefab;
-
     private int health;
     private int lifeLength;
-    private Action<GrassModel> releaseFn;  // c# way of passing methods, generic type is parameter type
+    private Action<GrassModel> releaseGrassFn;  // c# reflection, generic type is parameter type
     private DateTime activeStartTime;
+    private SpriteRenderer mySpriteRenderer;
+
 
     // for pool get
     public void Init(Vector3 spawnPosition)
@@ -23,44 +24,37 @@ public class GrassModel : MonoBehaviour
     }
 
     // for pool create
-    public void Init(Vector3 spawnPosition, Action<GrassModel> rfn)
+    public void Init(Vector3 spawnPosition, Action<GrassModel> rgfn)
     {
         Init(spawnPosition);
-        releaseFn = rfn;
+        releaseGrassFn = rgfn;
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
-
 
 
     private void Update()
     {
         if (DateTime.Now > activeStartTime.AddSeconds(lifeLength))
         {
-            DestroyGrass();
+            ReleaseGrass();
         }
     }
-
-
-  
-
 
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.transform.CompareTag("Animal"))
         {
-            Debug.Log("enter, health="+health);
+            Debug.Log("enter, health=" + health);
             InvokeRepeating(nameof(ShakeGrass), 0, 0.2f);
-           
 
             health--;
             if (health == 0)
             {
-                DestroyGrass();
+                ReleaseGrass();
             }
         }
     }
-
-
 
     private void OnTriggerExit(Collider collision)
     {
@@ -68,29 +62,17 @@ public class GrassModel : MonoBehaviour
         CancelInvoke(nameof(ShakeGrass));
     }
 
-    private void DestroyGrass()
+    private void ReleaseGrass()
     {
         CancelInvoke(nameof(ShakeGrass));
-
-        if (releaseFn != null)
-        {
-            var explosion = Instantiate(explosionPrefab);   // TODO: avoid instantiate destroy
-            explosion.transform.position = gameObject.transform.position;
-            Destroy(explosion, 5);
-
-            releaseFn.Invoke(this);
-        }
+        releaseGrassFn?.Invoke(this);
     }
 
     private bool isFliped = false;
     private void ShakeGrass()
     {
-        var mySpriteRenderer = GetComponent<SpriteRenderer>();      // TODO: optimize it out
         mySpriteRenderer.flipX = isFliped;
-
         isFliped = !isFliped;
-
-        
     }
 
 }

@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,17 +8,43 @@ public class GrassSpawnController : MonoBehaviour
 {
     public LayerMask layerMask;
     public float spawnSpeed = 0.1f;
-    public int maxInstanceCount = 1500;
-    public List<GrassModel> prefabs;
+    public int maxInstanceCount = 1000;
+    public List<GrassModel> grassPrefabs;
+    public GameObject explosionPrefab;
 
-    private ObjectPool<GrassModel> _pool;
+    private ObjectPool<GrassModel> _grassPool;
+    private ObjectPool<GameObject> _explosionPool;
+
+    public int count;       // for debugging in unity inspector
+
 
     private void Start()
     {
-        _pool = new ObjectPool<GrassModel>(
+        _explosionPool = new ObjectPool<GameObject>(
             () =>
             {
-                var grass = Instantiate(prefabs[Random.Range(0, prefabs.Count)]);
+                return Instantiate(explosionPrefab);
+            },
+            explosion =>
+            {
+                explosion.SetActive(true);
+            },
+            explosion =>
+            {
+                explosion.SetActive(false);
+            },
+            explosion =>
+            {
+                Destroy(explosion);
+            },
+            false, 50, 100
+         );
+
+
+        _grassPool = new ObjectPool<GrassModel>(
+            () =>
+            {
+                var grass = Instantiate(grassPrefabs[Random.Range(0, grassPrefabs.Count)]);
                 grass.Init(GetGroundSpawnPosition(), ReleaseGrass);
                 return grass;
             },
@@ -28,30 +55,33 @@ public class GrassSpawnController : MonoBehaviour
             },
             grass =>
             {
+                GetExplosion(grass.gameObject.transform.position);
                 grass.gameObject.SetActive(false);
             },
             grass =>
             {
+                GetExplosion(grass.gameObject.transform.position);
                 Destroy(grass.gameObject);
             },
-            false, maxInstanceCount, maxInstanceCount+100
+            false, maxInstanceCount, maxInstanceCount + 100
             );
+
 
         InvokeRepeating(nameof(GetGrass), 1, spawnSpeed);  // similar to FixedUpdate(), with finer control
     }
 
 
-
+    #region Grass
     private void GetGrass()
     {
-        _pool.Get();
+        _grassPool.Get();
+        count = _grassPool.CountActive;
     }
 
     private void ReleaseGrass(GrassModel grass)
     {
-        _pool.Release(grass);
+        _grassPool.Release(grass);
     }
-
 
     private Vector3 GetGroundSpawnPosition(float range = float.MaxValue)
     {
@@ -68,5 +98,21 @@ public class GrassSpawnController : MonoBehaviour
 
         return GetGroundSpawnPosition();
     }
+    #endregion
 
+    #region Explosion
+    private void GetExplosion(Vector3 spawnPosition)
+    {
+        var explosion = _explosionPool.Get();
+        explosion.gameObject.transform.position = spawnPosition;
+
+        StartCoroutine(ReleaseExplosionAfter5Seconds(explosion));
+    }
+
+    IEnumerator ReleaseExplosionAfter5Seconds(GameObject explosion)
+    {
+        yield return new WaitForSeconds(5);
+        _explosionPool.Release(explosion);
+    }
+    #endregion
 }
