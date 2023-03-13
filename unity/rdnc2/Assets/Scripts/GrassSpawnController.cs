@@ -111,7 +111,7 @@ public class GrassSpawnController : MonoBehaviour
 
     IEnumerator ReleaseExplosionAfter5Seconds(GameObject explosion)
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(5); // TODO: move to global var for new part
         _explosionPool.Release(explosion);
     }
     #endregion

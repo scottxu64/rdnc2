@@ -16,9 +16,15 @@ public class GoldenRetriever : MonoBehaviour
     private Animator animator;
     public int weight;
     private Action<GoldenRetriever> releaseFn;
+    private Camera mainCam;
+    public int dragSpeed = 5;
+    public LayerMask layerMask;
 
-    private const string ANIM = "anim";
+    private const string ANIMATION = "Animation";
     private const string WATER = "Water";
+    private const string STATIC_OBJ = "Static_Object";
+    private const string ANIMAL = "Animal";
+
     private const int SPEED_RUN = 3;
     private const int SPEED_WALK = 2;
     private const int SPEED_SWIM = 2;
@@ -35,9 +41,11 @@ public class GoldenRetriever : MonoBehaviour
         transform.Translate(state.direction * GetSpeed(state.anim) * Time.deltaTime, Space.World);
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(state.direction), 0.15f);
 
+        OnMouseEventHandler();
+
         if (DateTime.Now > state.endTime)
         {
-            SetState(GetAnim(), GetDirection(), GetEndTime());
+            SetState(GetAnim(), GetDirection(), GetDuration());
         }
     }
 
@@ -45,7 +53,7 @@ public class GoldenRetriever : MonoBehaviour
     {
         if (other.transform.CompareTag(WATER))
         {
-            SetState((int)animEnum.Swim, Vector3.forward, GetEndTime());
+            SetState((int)animEnum.Swim, Vector3.forward, GetDuration());
         }
     }
 
@@ -53,9 +61,62 @@ public class GoldenRetriever : MonoBehaviour
     {
         if (other.transform.CompareTag(WATER))
         {
-            SetState(GetMoveAnim(), Vector3.forward, GetEndTime());
+            SetState(GetMoveAnim(), Vector3.forward, GetDuration());
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag(STATIC_OBJ))
+        {
+            SetState(GetAnim(), GetDirection(), GetDuration());
+        }
+        if (collision.transform.CompareTag(ANIMAL))     // TODO: distinct duck, dog/cat, panda
+        {
+            SetState(GetAnim(), GetDirection(), GetDuration());
+            // bark audio
+        }
+    }
+
+
+    private bool isThisSelected = false;
+    private void OnMouseEventHandler()
+    {
+        if (Input.GetMouseButtonDown(0))    // TODO: multiple fingers?
+        {
+            Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue))
+            {
+                if (hit.transform == this)
+                {
+                    Debug.Log("hit this obj");
+                    isThisSelected = true;
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isThisSelected = false;
+        }
+
+        if (isThisSelected) // during hold
+        {
+            Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layerMask))        // to limit drag on land only?
+            {
+                var dragDirection = hit.point - transform.position; // TODO: enhance with a color line from target to obj
+                dragDirection.y = 0;
+
+                SetState((int)animEnum.Lie, dragDirection.normalized, 1);   // TODO: enhance water trigger change anim
+            }
+
+        }
+
+    }
+
     #endregion
 
     #region pool life cycle
@@ -65,7 +126,7 @@ public class GoldenRetriever : MonoBehaviour
         weight = UnityEngine.Random.Range(5, 10);       // TODO: dog specific, from input
         gameObject.transform.position = spawnPosition;
 
-        SetState((int)animEnum.Run, Vector3.forward, DateTime.Now.AddSeconds(3)); // pass in init cool time
+        SetState((int)animEnum.Run, Vector3.forward, 3); // pass in init cool time
     }
 
     // for pool create
@@ -74,6 +135,7 @@ public class GoldenRetriever : MonoBehaviour
         animator = GetComponent<Animator>();
         releaseFn = rdfn;
         Init(spawnPosition);
+        mainCam = Camera.main;
     }
 
     private void Release()  // TODO: when get, release one out of sight, if no inst to release, then create
@@ -95,14 +157,14 @@ public class GoldenRetriever : MonoBehaviour
 
     private int GetAnim()
     {
-        if (animator.GetInteger(ANIM) == (int)animEnum.Swim) return (int)animEnum.Swim;
+        if (animator.GetInteger(ANIMATION) == (int)animEnum.Swim) return (int)animEnum.Swim;
 
         return UnityEngine.Random.Range(0, 1) > 0.3f ? GetIdleAnim() : GetMoveAnim();// TODO: input idle move ratio
     }
 
-    private DateTime GetEndTime()
+    private int GetDuration()
     {
-        return DateTime.Now.AddSeconds(UnityEngine.Random.Range(2, 10));   // pass in
+        return UnityEngine.Random.Range(2, 10);   // pass in range
     }
 
     private Vector3 GetDirection()
@@ -114,6 +176,8 @@ public class GoldenRetriever : MonoBehaviour
 
     private int GetSpeed(int anim)
     {
+        if (isThisSelected) return dragSpeed;
+
         var speed = SPEED_IDLE;
 
         if (anim == (int)animEnum.Run) speed = SPEED_RUN;
@@ -123,23 +187,16 @@ public class GoldenRetriever : MonoBehaviour
         return speed;
     }
 
-
-
-
-
-
-    private void SetState(int anim, Vector3 direction, DateTime endTime)
+    private void SetState(int anim, Vector3 direction, int duration)
     {
         state = new State
         {
             anim = anim,
             direction = direction,
-            endTime = endTime
+            endTime = DateTime.Now.AddSeconds(duration)
         };
-        animator.SetInteger(ANIM, state.anim);
+        animator.SetInteger(ANIMATION, state.anim);
+        animator.speed = GetSpeed(state.anim);
     }
     #endregion
-
-
-
 }
